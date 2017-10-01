@@ -74,7 +74,6 @@ class Main{
 			}
 			if(cmd == 9)
 				show_help_menu();
-			
 		}
 		
 		void show_help_menu(){

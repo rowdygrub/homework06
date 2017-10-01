@@ -9,15 +9,15 @@ using namespace std;
 
 //enum enter as strings then check if the string equals fiction, nonfiction..., to pass fiction into enum. find a different way
 void Library::add_publication(){
-	Gtk::Dialog *menu = new Gtk::Dialog();
-	menu->set_title("Add Publication");
-
 	string title, author, copyright, genre, media, age, isbn;
 
 	//title
+	Gtk::Dialog *menu = new Gtk::Dialog();
+	menu->set_title("Add Publication");
+
 	Gtk::Label *label = new Gtk::Label("Enter Title");
 	menu->get_content_area()->pack_start(*label);
-	label->show();//shows the menu
+	label->show();
 
 	Gtk::Entry *entry = new Gtk::Entry{};
 	entry->set_text("");
@@ -28,10 +28,8 @@ void Library::add_publication(){
 	menu->add_button("OK",1);
 	menu->set_default_response(1);
 
-	menu->run(); //this makes dialog pop up		
-	
+	menu->run(); 	
 	title = entry->get_text();
-
 	menu->close();
 
 	while(Gtk::Main::events_pending()) Gtk::Main::iteration();
@@ -45,7 +43,7 @@ void Library::add_publication(){
 
 	Gtk::Label *label2 = new Gtk::Label("Enter Author");
 	menu2->get_content_area()->pack_start(*label2);
-	label2->show();//shows the menu
+	label2->show();
 
 	Gtk::Entry *entry2 = new Gtk::Entry{};
 	entry2->set_text("");
@@ -56,7 +54,7 @@ void Library::add_publication(){
 	menu2->add_button("OK",1);
 	menu2->set_default_response(1);
 
-	menu2->run(); //this makes dialog pop up		
+	menu2->run(); 		
 	author = entry2->get_text();
 	menu2->close();
 
@@ -65,19 +63,135 @@ void Library::add_publication(){
 	delete label2;
 	delete menu2;
 
+	//copyright
+	Gtk::Dialog *menu3 = new Gtk::Dialog();
+	menu3->set_title("Add Publication");
+
+	Gtk::Label *label3 = new Gtk::Label("Enter Copyright Year");
+	menu3->get_content_area()->pack_start(*label3);
+	label3->show();
+
+	Gtk::Entry *entry3 = new Gtk::Entry{};
+	entry3->set_text("");
+	entry3->set_max_length(50);
+	entry3->show();
+	menu3->get_vbox()->pack_start(*entry3);
+			
+	menu3->add_button("OK",1);
+	menu3->set_default_response(1);
+
+	menu3->run(); 		
+	copyright = entry3->get_text();
+	menu3->close();
+
+	while(Gtk::Main::events_pending()) Gtk::Main::iteration();
+	delete entry3;
+	delete label3;
+	delete menu3;
 	
+	//genre
+	Gtk::Dialog *menu4 = new Gtk::Dialog();
+	menu4->set_title("Add Publication");
+
+	Gtk::Label *label4 = new Gtk::Label("Enter Genre");
+	menu4->get_content_area()->pack_start(*label4);
+	label4->show();
+
+	Gtk::Entry *entry4 = new Gtk::Entry{};
+	entry4->set_text("");
+	entry4->set_max_length(50);
+	entry4->show();
+	menu4->get_vbox()->pack_start(*entry4);
+			
+	menu4->add_button("OK",1);
+	menu4->set_default_response(1);
+
+	menu4->run(); 		
+	genre = entry4->get_text();
+	menu4->close();
+
+	while(Gtk::Main::events_pending()) Gtk::Main::iteration();
+	delete entry4;
+	delete label4;
+	delete menu4;
 	
-	//TODO the rest
+	//media
+	Gtk::Dialog *menu5 = new Gtk::Dialog();
+	menu5->set_title("Add Publication");
+
+	Gtk::Label *label5 = new Gtk::Label("Enter Media");
+	menu5->get_content_area()->pack_start(*label5);
+	label5->show();
+
+	Gtk::Entry *entry5 = new Gtk::Entry{};
+	entry5->set_text("");
+	entry5->set_max_length(50);
+	entry5->show();
+	menu5->get_vbox()->pack_start(*entry5);
+			
+	menu5->add_button("OK",1);
+	menu5->set_default_response(1);
+
+	menu5->run(); 		
+	media = entry5->get_text();
+	menu5->close();
+
+	while(Gtk::Main::events_pending()) Gtk::Main::iteration();
+	delete entry5;
+	delete label5;
+	delete menu5;
 	
-	cout << "Enter copyright year:";
+	//age
+	Gtk::Dialog *menu6 = new Gtk::Dialog();
+	menu6->set_title("Add Publication");
+
+	Gtk::Label *label6 = new Gtk::Label("Enter Age");
+	menu6->get_content_area()->pack_start(*label6);
+	label6->show();
+
+	Gtk::Entry *entry6 = new Gtk::Entry{};
+	entry6->set_text("");
+	entry6->set_max_length(50);
+	entry6->show();
+	menu6->get_vbox()->pack_start(*entry6);
+			
+	menu6->add_button("OK",1);
+	menu6->set_default_response(1);
+
+	menu6->run(); 		
+	age = entry6->get_text();
+	menu6->close();
+
+	while(Gtk::Main::events_pending()) Gtk::Main::iteration();
+	delete entry6;
+	delete label6;
+	delete menu6;
 	
-	cout << "Enter genre:";
-	
-	cout << "Enter media:";
-	
-	cout << "Enter age:";
-	
-	cout << "Enter isbn number:";
+	//isbn
+	Gtk::Dialog *menu7 = new Gtk::Dialog();
+	menu7->set_title("Add Publication");
+
+	Gtk::Label *label7 = new Gtk::Label("Enter ISBN");
+	menu7->get_content_area()->pack_start(*label7);
+	label7->show();
+
+	Gtk::Entry *entry7 = new Gtk::Entry{};
+	entry7->set_text("");
+	entry7->set_max_length(50);
+	entry7->show();
+	menu7->get_vbox()->pack_start(*entry7);
+			
+	menu7->add_button("OK",1);
+	menu7->set_default_response(1);
+
+	menu7->run(); 	
+	isbn = entry7->get_text();
+	menu7->close();
+
+	while(Gtk::Main::events_pending()) Gtk::Main::iteration();
+	delete entry7;
+	delete label7;
+	delete menu7;
 	
 	
 	//maps
