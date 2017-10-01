@@ -1,6 +1,6 @@
 #include "library.h"
 #include "publication.h"
-#include <iostream>
+
 #include <string>
 #include <gtkmm.h>
 using namespace std;
@@ -44,33 +44,116 @@ class Main{
 		}	
 
 		void list_publications(){
+			Gtk::Dialog *menu = new Gtk::Dialog();
+			menu->set_title("Publications"); 
+
+			string list = "Publication List\n=============\n";
 			for(int i = 0; i < library.number_of_publications();i++)
-				cout << i << ": " << library.publication_to_string(i) << endl;
+				list = list + to_string(i) + ": " + library.publication_to_string(i) + "\n";
+			
+			Gtk::Label *label = new Gtk::Label(list);
+			menu->get_content_area()->pack_start(*label);
+			label->show();
+			
+			menu->add_button("OK",1);
+			menu->set_default_response(1);
+			
+			menu->run();
+			menu->close();
+			
+			while(Gtk::Main::events_pending()) Gtk::Main::iteration();
+			delete label;
+			delete menu;
 		}
 
 		void execute_cmd(int cmd){
-			int n;
 			if(cmd == 0)
 				exit(0);
 			if(cmd == 1)
 				library.add_publication();	
 			if(cmd == 3){
-				string name,phone;
-				cout << "Enter Publication # to check out:";
-				cin >> n;
-				cout << "Enter name:";
-				cin.ignore();
-				getline(cin,name);
-				cout << "Enter Phone Number:";
-				cin >> phone;
-				library.check_out(n,name,phone);
+				string n, name,phone;
+							
+				for(int i = 0;i<3;i++){
+					Gtk::Dialog *menu = new Gtk::Dialog();
+					menu->set_title("Check Out Publication");
+					Gtk::Label *label;
+					
+					if(i==0)
+						label = new Gtk::Label("Enter Publication # to check out");
+					if(i==1)
+						label = new Gtk::Label("Enter Name");
+					if(i==2)
+						label = new Gtk::Label("Enter Phone Number");
+					
+					menu->get_content_area()->pack_start(*label);
+					label->show();
+
+					Gtk::Entry *entry = new Gtk::Entry{};
+					entry->set_text("");
+					entry->set_max_length(50);
+					entry->show();
+					menu->get_vbox()->pack_start(*entry);
+			
+					//buttons
+					menu->add_button("OK",1);
+					menu->set_default_response(1);
+		
+					//starts dialog msg
+					menu->run(); 
+					
+					if(i==0)
+						n = entry->get_text();
+					if(i==1)
+						name = entry->get_text();
+					if(i==2)
+						phone = entry->get_text();
+						
+					menu->close();
+
+					while(Gtk::Main::events_pending()) Gtk::Main::iteration();
+					delete entry;
+					delete label;
+					delete menu;
+				}
+				int _n = stoi(n.c_str());
+		
+				library.check_out(_n,name,phone);
 			}
+			
 			if(cmd == 2)
 				list_publications();
 			if(cmd == 4){
-				cout << "Enter index to check in:";
-				cin >> n;
-				library.check_in(n);
+				string n;
+				int _n;
+				Gtk::Dialog *menu = new Gtk::Dialog();
+				menu->set_title("Check Out Publication");
+				Gtk::Label *label = new Gtk::Label("Enter index to check in");
+				menu->get_content_area()->pack_start(*label);
+				label->show();
+
+				Gtk::Entry *entry = new Gtk::Entry{};
+				entry->set_text("");
+				entry->set_max_length(50);
+				entry->show();
+				menu->get_vbox()->pack_start(*entry);
+			
+				//buttons
+				menu->add_button("OK",1);
+				menu->set_default_response(1);
+		
+				//starts dialog msg
+				menu->run(); 
+				n = entry->get_text();
+				menu->close();
+
+				while(Gtk::Main::events_pending()) Gtk::Main::iteration();
+				delete entry;
+				delete label;
+				delete menu;
+				
+				_n = stoi(n.c_str());
+				library.check_in(_n);
 			}
 			if(cmd == 9)
 				show_help_menu();
