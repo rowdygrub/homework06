@@ -7,7 +7,7 @@ using namespace std;
 
 class Main{
 	public:
-		void show_menu(){
+		int show_menu(){
 			Gtk::Dialog *menu = new Gtk::Dialog();
 			menu->set_title("Main Menu"); 
 
@@ -29,14 +29,18 @@ class Main{
 			menu->set_default_response(1);
 			
 			menu->run(); //this makes dialog pop up
+			
 			string text = entry->get_text();
-		
+			int _text = stoi(text.c_str());
+			
 			menu->close();
 			
 			while(Gtk::Main::events_pending()) Gtk::Main::iteration();
 			delete entry;
 			delete label;
 			delete menu;
+			
+			return _text;
 		}	
 
 		void list_publications(){
@@ -72,16 +76,26 @@ class Main{
 				show_help_menu();
 			
 		}
+		
 		void show_help_menu(){
-			cout << "Command 1: Add Publications\n";
-			cout << "Options for Genre: fiction, nonfiction, selfhelp, performance" << endl;
-			cout << "Options for Media: book, periodical, newspaper, audio, video" <<endl;
-			cout << "Options for Age: children, teen, adult, restricted" << endl;
-			cout << "Command 2: List all publications including patron and patron number for checkout publications" << endl;
-			cout << "Command 3: Checkout publication" << endl;
-			cout << "Enter publication index, then patron, and number" << endl;
-			cout << "Command 4: Check in publication" << endl;
-			cout << "Enter publication index to check in publication" << endl << endl;
+			Gtk::Dialog *help_menu = new Gtk::Dialog();
+			help_menu->set_title("Help Menu");
+			
+			string list = "Command 1: Add Publications\nOptions for Genre: fiction, nonfiction, selfhelp, performance\nOptions for Media: book, periodical, newspaper, audio, video\nOptions for Age: children, teen, adult, restricted\nCommand 2: List all publications including patron and patron number for checkout publications\nCommand 3: Checkout publication\nEnter publication index, then patron, and number\nCommand 4: Check in publication\nEnter publication index to check in publication\n";
+			
+			Gtk::Label *label = new Gtk::Label(list);
+			help_menu->get_content_area()->pack_start(*label);
+			label->show();//shows the menu
+			
+			help_menu->add_button("OK",1);
+			help_menu->set_default_response(1);
+			
+			help_menu->run(); //this makes dialog pop up
+			help_menu->close();
+			
+			while(Gtk::Main::events_pending()) Gtk::Main::iteration();
+			delete label;
+			delete help_menu;
 		}
 	private:
 		Library library;
@@ -91,15 +105,13 @@ int main(int argc, char *argv[]) {
 	Gtk::Main kit(argc, argv); //initialize gtkmm
 
 	Main h;
-	h.show_menu();
-	int cmd;
-
+	int cmd = -1;
 	
-	/*while(true){
-		cin >> cmd;
+	
+	while(cmd){
+		cmd = h.show_menu();
 		h.execute_cmd(cmd);
-		h.show_menu();
-	}*/
+	}
 		
 }
 
