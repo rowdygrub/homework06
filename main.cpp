@@ -1,6 +1,5 @@
 #include "library.h"
 #include "publication.h"
-
 #include <string>
 #include <gtkmm.h>
 using namespace std;
@@ -66,14 +65,35 @@ class Main{
 			delete menu;
 		}
 
+		void input_validation(){
+			Gtk::Dialog *menu = new Gtk::Dialog();
+			menu->set_title("Check Out/In Publication");
+			Gtk::Label *label = new Gtk::Label("Error: No publications!");
+			menu->get_content_area()->pack_start(*label);
+			label->show();
+			menu->add_button("OK",1);
+			menu->set_default_response(1);
+			menu->run(); 
+			menu->close();
+
+			while(Gtk::Main::events_pending()) Gtk::Main::iteration();
+			delete label;
+			delete menu;
+		}
+
 		void execute_cmd(int cmd){
 			if(cmd == 0)
 				exit(0);
 			if(cmd == 1)
 				library.add_publication();	
 			if(cmd == 3){
+				if(library.number_of_publications() == 0){
+					input_validation();
+					return;
+				}
+
 				string n, name,phone;
-							
+								 
 				for(int i = 0;i<3;i++){
 					Gtk::Dialog *menu = new Gtk::Dialog();
 					menu->set_title("Check Out Publication");
@@ -124,10 +144,14 @@ class Main{
 			if(cmd == 2)
 				list_publications();
 			if(cmd == 4){
+				if(library.number_of_publications() == 0){
+					input_validation();
+					return;
+				}
 				string n;
 				int _n;
 				Gtk::Dialog *menu = new Gtk::Dialog();
-				menu->set_title("Check Out Publication");
+				menu->set_title("Check in Publication");
 				Gtk::Label *label = new Gtk::Label("Enter index to check in");
 				menu->get_content_area()->pack_start(*label);
 				label->show();
