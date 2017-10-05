@@ -1,5 +1,6 @@
 main:  main.o publication.o library.o
 	g++ -std=c++11 -o main main.o publication.o library.o `/usr/bin/pkg-config gtkmm-3.0 --cflags --libs`
+	./main
 main.o: main.cpp
 	g++ -std=c++11 -c main.cpp `/usr/bin/pkg-config gtkmm-3.0 --cflags --libs`
 publication.o: publication.cpp publication.h

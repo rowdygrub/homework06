@@ -13,29 +13,25 @@ void Library::add_publication(){
 
 	for(int i = 0; i < 7; i++){
 		
-		Gtk::Dialog *menu = new Gtk::Dialog();
+		Gtk::MessageDialog *menu = new Gtk::MessageDialog("<b>Enter Title</b>",true);
+		
+		if(i==0)
+			menu = new Gtk::MessageDialog("<b>Enter Title</b>",true);
+		if(i==1)
+			menu = new Gtk::MessageDialog("<b>Enter Author</b>",true);
+		if(i==2)
+			menu = new Gtk::MessageDialog("<b>Enter Copyright year</b>",true);
+		if(i==3)
+			menu = new Gtk::MessageDialog("<b>Enter Genre</b>",true);
+		if(i==4)
+			menu = new Gtk::MessageDialog("<b>Enter Media</b>",true);
+		if(i==5)
+			menu = new Gtk::MessageDialog("<b>Enter Age</b>",true);
+		if(i==6)
+			menu = new Gtk::MessageDialog("<b>Enter ISBN</b>",true);
+
 		menu->set_title("Add Publication");
 		
-		//secondary text msg
-		Gtk::Label *label; 
-		if(i==0)
-			label = new Gtk::Label("Enter Title");
-		if(i==1)
-			label = new Gtk::Label("Enter Author");
-		if(i==2)
-			label = new Gtk::Label("Enter Copyright year");
-		if(i==3)
-			label = new Gtk::Label("Enter Genre");
-		if(i==4)
-			label = new Gtk::Label("Enter Media");
-		if(i==5)
-			label = new Gtk::Label("Enter Age");
-		if(i==6)
-			label = new Gtk::Label("Enter ISBN");
-
-		menu->get_content_area()->pack_start(*label);
-		label->show();
-
 		Gtk::Entry *entry = new Gtk::Entry{};
 		entry->set_text("");
 		entry->set_max_length(50);
@@ -43,7 +39,7 @@ void Library::add_publication(){
 		menu->get_vbox()->pack_start(*entry);
 			
 		//buttons
-		menu->add_button("OK",1);
+		
 		menu->set_default_response(1);
 		
 		//starts dialog msg
@@ -68,7 +64,6 @@ void Library::add_publication(){
 
 		while(Gtk::Main::events_pending()) Gtk::Main::iteration();
 		delete entry;
-		delete label;
 		delete menu;
 	}
 	

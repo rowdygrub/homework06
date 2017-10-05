@@ -7,15 +7,15 @@ using namespace std;
 class Main{
 	public:
 		int show_menu(){
-			Gtk::Dialog *menu = new Gtk::Dialog();
+			Gtk::MessageDialog *menu = new Gtk::MessageDialog("<b><big>C1325\nLibrary Management System<sup>TM</sup></big></b>",true);
 			menu->set_title("Main Menu"); 
 
 			string list =
-			"===============================\nC1325 Library Management System\n===============================\n\nPublications\n------------\n(1) Add publications\n(2) List all publications\n(3) Check out publication\n(4) Check in publication\n\nUtility\n-------\n(9) Help\n(0) Exit\n";
-			
-			Gtk::Label *label = new Gtk::Label(list);
-			menu->get_content_area()->pack_start(*label);
-			label->show();//shows the menu
+			"\n<b><u>Publications</u></b>\n(1) Add publications\n(2) List all publications\n(3) Check out publication\n(4) Check in publication\n\n<b><u>Utility</u></b>\n<span fgcolor='#00ff00'>(9) Help</span>\n(0) Exit\n";
+			menu->set_secondary_text(list,true);
+			//Gtk::Label *label = new Gtk::Label(list);
+			//menu->get_content_area()->pack_start(*label);
+			//label->show();//shows the menu
 			
 			Gtk::Entry *entry = new Gtk::Entry{};
 			entry->set_text("");
@@ -24,8 +24,8 @@ class Main{
 			menu->get_vbox()->pack_start(*entry);
 			
 			menu->add_button("Cancel",0);
-			menu->add_button("OK",1);
-			menu->set_default_response(1);
+			//menu->add_button("OK",1);
+			//menu->set_default_response(1);
 			
 			menu->run(); //this makes dialog pop up
 			
@@ -36,7 +36,7 @@ class Main{
 			
 			while(Gtk::Main::events_pending()) Gtk::Main::iteration();
 			delete entry;
-			delete label;
+			//delete label;
 			delete menu;
 			
 			return _text;
@@ -184,23 +184,17 @@ class Main{
 		}
 		
 		void show_help_menu(){
-			Gtk::Dialog *help_menu = new Gtk::Dialog();
+			string list = "<b>Command 1:</b> Add Publications\nOptions for Genre: fiction, nonfiction, selfhelp, performance\nOptions for Media: book, periodical, newspaper, audio, video\nOptions for Age: children, teen, adult, restricted\n\n<b>Command 2:</b> List all publications including patron and patron number for checkout publications\n\n<b>Command 3:</b> Checkout publication\nEnter publication index, then patron, and number\n\n<b>Command 4:</b> Check in publication\nEnter publication index to check in publication\n";
+			Gtk::MessageDialog *help_menu = new Gtk::MessageDialog(list,true);
 			help_menu->set_title("Help Menu");
-			
-			string list = "Command 1: Add Publications\nOptions for Genre: fiction, nonfiction, selfhelp, performance\nOptions for Media: book, periodical, newspaper, audio, video\nOptions for Age: children, teen, adult, restricted\nCommand 2: List all publications including patron and patron number for checkout publications\nCommand 3: Checkout publication\nEnter publication index, then patron, and number\nCommand 4: Check in publication\nEnter publication index to check in publication\n";
-			
-			Gtk::Label *label = new Gtk::Label(list);
-			help_menu->get_content_area()->pack_start(*label);
-			label->show();//shows the menu
-			
-			help_menu->add_button("OK",1);
+				
 			help_menu->set_default_response(1);
 			
 			help_menu->run(); //this makes dialog pop up
 			help_menu->close();
 			
 			while(Gtk::Main::events_pending()) Gtk::Main::iteration();
-			delete label;
+			
 			delete help_menu;
 		}
 	private:
