@@ -43,11 +43,11 @@ Main_window::Main_window(){
 }
 
 void Main_window::on_list_click(){
-	main->execute_cmd(2);
+	control->execute_cmd(2);
 }
 
 void Main_window::on_add_click(){
-	main->execute_cmd(1);
+	control->execute_cmd(1);
 }
 
 void Main_window::on_quit_click(){
