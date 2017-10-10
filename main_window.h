@@ -1,6 +1,7 @@
 #ifndef MAIN_WINDOW_H
 #define MAIN_WINDOW_H
 
+#include "controller.cpp"
 #include "library.h"
 #include "publication.h"
 #include <string>
@@ -12,6 +13,13 @@ class Main_window : public Gtk::Window{
 		Main_window();
 		virtual ~Main_window();
 	protected:
-		void on_new_click();
 		void on_quit_click();
-		void
+		/*void on_list_click();
+		void on_add_click();
+		void on_checkout_click();
+		void on_checkin_click();
+		void on_about_click();*/
+	private:
+		Main *main;
+};
+#endif
