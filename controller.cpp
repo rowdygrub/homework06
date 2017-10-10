@@ -1,11 +1,8 @@
-#include "library.h"
-#include "publication.h"
-#include <string>
-#include <gtkmm.h>
+
+#include "controller.h"
 using namespace std;
-class Main{
-	public:
-		void list_publications(){
+
+		void controller::list_publications(){
 			Gtk::Dialog *menu = new Gtk::Dialog();
 			menu->set_title("Publications"); 
 
@@ -28,7 +25,7 @@ class Main{
 			delete menu;
 		}
 
-		void input_validation(){
+		void controller::input_validation(){
 			Gtk::Dialog *menu = new Gtk::Dialog();
 			menu->set_title("Check Out/In Publication");
 			Gtk::Label *label = new Gtk::Label("Error: No publications!");
@@ -44,7 +41,7 @@ class Main{
 			delete menu;
 		}
 
-		void execute_cmd(int cmd){
+		void controller::execute_cmd(int cmd){
 			if(cmd == 0)
 				exit(0);
 			if(cmd == 1)
@@ -146,7 +143,7 @@ class Main{
 				show_help_menu();
 		}
 		
-		void show_help_menu(){
+		void controller::show_help_menu(){
 			string list = "<b>Command 1:</b> Add Publications\nOptions for Genre: fiction, nonfiction, selfhelp, performance\nOptions for Media: book, periodical, newspaper, audio, video\nOptions for Age: children, teen, adult, restricted\n\n<b>Command 2:</b> List all publications including patron and patron number for checkout publications\n\n<b>Command 3:</b> Checkout publication\nEnter publication index, then patron, and number\n\n<b>Command 4:</b> Check in publication\nEnter publication index to check in publication\n";
 			Gtk::MessageDialog *help_menu = new Gtk::MessageDialog(list,true);
 			help_menu->set_title("Help Menu");
@@ -160,6 +157,4 @@ class Main{
 			
 			delete help_menu;
 		}
-	private:
-		Library library;
-};
+
