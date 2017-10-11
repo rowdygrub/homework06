@@ -20,6 +20,6 @@ class Main_window : public Gtk::Window{
 		void on_checkin_click();
 		void on_about_click();
 	private:
-		controller *control;
+		controller control;
 };
 #endif

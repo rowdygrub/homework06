@@ -13,7 +13,7 @@ void Library::add_publication(){
 
 	for(int i = 0; i < 7; i++){
 		
-		Gtk::MessageDialog *menu = new Gtk::MessageDialog("<b>Enter Title</b>",true);
+		Gtk::MessageDialog *menu;
 		
 		if(i==0)
 			menu = new Gtk::MessageDialog("<b>Enter Title</b>",true);
